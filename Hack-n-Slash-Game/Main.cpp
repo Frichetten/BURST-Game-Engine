@@ -10,6 +10,7 @@ int main()
 	if (!texture.loadFromFile("woodfloor_c.png"))
 		printf("Failure to load file\n");
 
+
 	while (window.isOpen())
 	{
 		sf::Event event;
