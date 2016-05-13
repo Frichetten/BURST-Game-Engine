@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+
 class Character {
 
 	int health;
@@ -19,10 +21,13 @@ class Player : public Character {
 	int mana;
 	int x;
 	int y;
+	sf::Sprite sprite;
 
 	public:
 		Player();
 		void playerInput();
+		void setSprite(sf::Sprite playerSprite);
+		sf::Sprite getSprite();
 		int getX();
 		int getY();
 };
@@ -38,6 +43,7 @@ class Enemy : public Character {
 		Enemy();
 		int getX();
 		int getY();
+		int getHealth();
 		void setX(int num);
 		void setY(int num);
 };

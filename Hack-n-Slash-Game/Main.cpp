@@ -1,43 +1,70 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
+#include <vector>
 #include "Character.h"
 
-int main()
-{
-	sf::RenderWindow window(sf::VideoMode(800, 800), "Game Engine Window");
-	window.setFramerateLimit(60);
+void loadTextures(std::vector<sf::Texture> &textureBox) {
+	//Loading map texture
+	sf::Texture mapTexture;
+	if (!mapTexture.loadFromFile("Textures/woodfloor_c.png"))
+		printf("Failure to load map texture from file.\n");
+	mapTexture.setRepeated(true);
+	textureBox.push_back(mapTexture);
 
-	sf::Texture texture;
-	if (!texture.loadFromFile("Textures/woodfloor_c.png"))
-		printf("Failure to load file\n");
-	texture.setRepeated(true);
-
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-	sprite.setTextureRect({ 0,0,800,800 });
-
+	//Loading player texture
 	sf::Texture playerTexture;
 	if (!playerTexture.loadFromFile("Textures/Player.png"))
-		printf("Failure to load file\n");
+		printf("Failure to load player texture from file.\n");
+	textureBox.push_back(playerTexture);
 
-	sf::Sprite playerSprite;
-	playerSprite.setTexture(playerTexture);
-	playerSprite.setScale(0.5,0.5);
-
-	Player player;
-	
+	//Loading enemy texture
 	sf::Texture enemyTexture;
 	if (!enemyTexture.loadFromFile("Textures/Enemy.png"))
 		printf("Failure to load file.\n");
+	textureBox.push_back(enemyTexture);
+}
 
-	sf::Sprite enemySprite;
-	enemySprite.setTexture(enemyTexture);
-	enemySprite.setScale(0.5, 0.5);
+void loadSprites(Player &player, std::vector<Enemy> &enemyBox, std::vector<sf::Texture> &textureBox) {
+	sf::Sprite playerSprite;
+	playerSprite.setTexture(textureBox.at(1));
+	playerSprite.setScale(0.5, 0.5);
+
+	player.setSprite(playerSprite);
+}
+
+void renderEnemies(sf::RenderWindow &window, std::vector<Enemy> &enemyBox) {
+
+}
+
+int main()
+{
+	//Creating the engine window
+	sf::RenderWindow window(sf::VideoMode(800, 800), "Game Engine Window");
+	window.setFramerateLimit(60);
+
+	//Loading textures
+	std::vector<sf::Texture> textureBox;
+	loadTextures(textureBox);
+
+	//Building player character
+	Player player;
+
+	//Building enemies
+	std::vector<Enemy> enemyBox;
+	for (int i = 0; i < 3; i++) {
+		Enemy enemy;
+		enemy.setX(rand() % 750);
+		enemy.setY(rand() % 750);
+		enemyBox.push_back(enemy);
+	}
+
+	//Creating map and player sprites
+	sf::Sprite map;
+	map.setTexture(textureBox.at(0));
+	map.setTextureRect({ 0,0,800,800 });
+	loadSprites(player, enemyBox, textureBox);
+	
 	srand(time(NULL));
-
-	Enemy enemy;
-	enemy.setX(rand() % 750);
-	enemy.setY(rand() % 750);
 
 	//Game Loop
 	while (window.isOpen())
@@ -50,15 +77,16 @@ int main()
 		}
 
 		player.playerInput();
-		printf("X:%i Y:%i\n", player.getX(), player.getY());
-		playerSprite.setPosition(player.getX(), player.getY());
-
-		enemySprite.setPosition(enemy.getX(), enemy.getY());
+		//printf("X:%i Y:%i\n", player.getX(), player.getY());
+		player.getSprite().setPosition(player.getX(), player.getY());
 
 		window.clear();
-		window.draw(sprite);
-		window.draw(playerSprite);
-		window.draw(enemySprite);
+		window.draw(map);
+		window.draw(player.getSprite());
+		
+		//Render enemy sprites
+		renderEnemies(window, enemyBox);
+
 		window.display();
 	}
 

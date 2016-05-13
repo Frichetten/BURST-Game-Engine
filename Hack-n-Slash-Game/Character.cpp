@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "Character.h"
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
 
 int n = 5;
 
@@ -48,12 +48,24 @@ void Enemy::setY(int num) {
 	this->y = num;
 }
 
+int Enemy::getHealth() {
+	return this->health;
+}
+
 Player::Player() {
 	printf("Successfully created a player\n");
 	this->x = 0;
 	this->y = 0;
 	this->health = 10;
 	this->mana = 7;
+}
+
+void Player::setSprite(sf::Sprite playerSprite) {
+	this->sprite = playerSprite;
+}
+
+sf::Sprite Player::getSprite() {
+	return this->sprite;
 }
 
 void Player::playerInput() {
