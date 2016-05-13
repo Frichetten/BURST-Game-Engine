@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
+#include "Character.h"
 
 int main()
 {
@@ -34,6 +35,15 @@ int main()
 	enemySprite.setScale(0.5, 0.5);
 	srand(time(NULL));
 	enemySprite.setPosition(rand()%750, rand()%750);
+
+
+	Character charc;
+
+
+
+
+
+
 
 	//Game Loop
 	while (window.isOpen())
