@@ -4,9 +4,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(800, 800), "Game Engine Window");
 	window.setFramerateLimit(60);
 
 	sf::Texture texture;
@@ -26,6 +24,8 @@ int main()
 	playerSprite.setTexture(playerTexture);
 	playerSprite.setScale(0.5,0.5);
 
+	Player player;
+	
 	sf::Texture enemyTexture;
 	if (!enemyTexture.loadFromFile("Textures/Enemy.png"))
 		printf("Failure to load file.\n");
@@ -34,16 +34,10 @@ int main()
 	enemySprite.setTexture(enemyTexture);
 	enemySprite.setScale(0.5, 0.5);
 	srand(time(NULL));
-	enemySprite.setPosition(rand()%750, rand()%750);
 
-
-	Character charc;
-
-
-
-
-
-
+	Enemy enemy;
+	enemy.setX(rand() % 750);
+	enemy.setY(rand() % 750);
 
 	//Game Loop
 	while (window.isOpen())
@@ -55,17 +49,13 @@ int main()
 				window.close();
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			playerSprite.setPosition(playerSprite.getPosition().x + 5, playerSprite.getPosition().y);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			playerSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y + 5);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-			playerSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y - 5);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			playerSprite.setPosition(playerSprite.getPosition().x - 5, playerSprite.getPosition().y);
+		player.playerInput();
+		printf("X:%i Y:%i\n", player.getX(), player.getY());
+		playerSprite.setPosition(player.getX(), player.getY());
+
+		enemySprite.setPosition(enemy.getX(), enemy.getY());
 
 		window.clear();
-		window.draw(shape);
 		window.draw(sprite);
 		window.draw(playerSprite);
 		window.draw(enemySprite);
