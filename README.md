@@ -8,5 +8,7 @@ This game will be rather grand in scale (at least for a first time game in an un
     * Load Map Sprite (Complete)
     * Basic Character Movement (Complete)
     * Basic Enemy Created (Complete)
+    * Character Class Developed
+    * Player, and Enemy Classes Inherit Character Class
     * Efficient Enemy Creation
 
