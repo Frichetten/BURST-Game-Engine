@@ -24,6 +24,14 @@ int main()
 	playerSprite.setTexture(playerTexture);
 	playerSprite.setScale(0.5,0.5);
 
+	sf::Texture enemyTexture;
+	if (!enemyTexture.loadFromFile("Textures/Enemy.png"))
+		printf("Failure to load file.\n");
+
+	sf::Sprite enemySprite;
+	enemySprite.setTexture(enemyTexture);
+	enemySprite.setScale(0.5, 0.5);
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -46,6 +54,7 @@ int main()
 		window.draw(shape);
 		window.draw(sprite);
 		window.draw(playerSprite);
+		window.draw(enemySprite);
 		window.display();
 	}
 
