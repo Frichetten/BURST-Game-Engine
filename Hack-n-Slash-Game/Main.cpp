@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <stdlib.h>
 
 int main()
 {
@@ -31,7 +32,10 @@ int main()
 	sf::Sprite enemySprite;
 	enemySprite.setTexture(enemyTexture);
 	enemySprite.setScale(0.5, 0.5);
+	srand(time(NULL));
+	enemySprite.setPosition(rand()%750, rand()%750);
 
+	//Game Loop
 	while (window.isOpen())
 	{
 		sf::Event event;
