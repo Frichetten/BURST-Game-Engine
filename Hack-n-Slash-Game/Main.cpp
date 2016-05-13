@@ -2,14 +2,27 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
+	window.setFramerateLimit(60);
 
 	sf::Texture texture;
-	if (!texture.loadFromFile("woodfloor_c.png"))
+	if (!texture.loadFromFile("Textures/woodfloor_c.png"))
+		printf("Failure to load file\n");
+	texture.setRepeated(true);
+
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+	sprite.setTextureRect({ 0,0,800,800 });
+
+	sf::Texture playerTexture;
+	if (!playerTexture.loadFromFile("Textures/Player.png"))
 		printf("Failure to load file\n");
 
+	sf::Sprite playerSprite;
+	playerSprite.setTexture(playerTexture);
+	playerSprite.setScale(0.5,0.5);
 
 	while (window.isOpen())
 	{
@@ -20,8 +33,19 @@ int main()
 				window.close();
 		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			playerSprite.setPosition(playerSprite.getPosition().x + 5, playerSprite.getPosition().y);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			playerSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y + 5);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			playerSprite.setPosition(playerSprite.getPosition().x, playerSprite.getPosition().y - 5);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			playerSprite.setPosition(playerSprite.getPosition().x - 5, playerSprite.getPosition().y);
+
 		window.clear();
 		window.draw(shape);
+		window.draw(sprite);
+		window.draw(playerSprite);
 		window.display();
 	}
 
