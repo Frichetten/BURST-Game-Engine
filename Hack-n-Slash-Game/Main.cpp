@@ -78,6 +78,10 @@ int main()
 	map.setTextureRect({ 0,0,800,800 });
 	loadSprites(player, enemyBox, textureBox);
 
+	sf::RectangleShape healthBar(sf::Vector2f(100,50));
+	healthBar.setFillColor(sf::Color::Blue);
+	healthBar.setPosition(10, 600);
+
 	//Game Loop
 	while (window.isOpen())
 	{
@@ -106,6 +110,7 @@ int main()
 		renderEnemies(window, enemyBox);
 
 		//Render UI
+		window.draw(healthBar);
 
 		window.display();
 	}
