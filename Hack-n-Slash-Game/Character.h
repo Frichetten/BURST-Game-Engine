@@ -4,7 +4,7 @@ class Character {
 
 	int health;
 	int mana;
-	//int x;
+	int x;
 	int y;
 
 	public:
@@ -28,6 +28,7 @@ class Player : public Character {
 		void playerInput();
 		void setSprite(sf::Sprite playerSprite);
 		sf::Sprite& getSprite();
+		void animateRight(Player &player, sf::Texture texture);
 		int getX();
 		int getY();
 		void setX(int num);

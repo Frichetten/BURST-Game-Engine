@@ -105,6 +105,10 @@ void Player::playerInput() {
 		this->moveLeft(this->x);
 }
 
+void Player::animateRight(Player &player, sf::Texture texture) {
+	player.getSprite().setTexture(texture);
+}
+
 Enemy::Enemy() {
 	printf("Successfully created a Enemy\n");
 	this->x = 0;

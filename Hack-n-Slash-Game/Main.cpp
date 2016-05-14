@@ -87,6 +87,8 @@ int main()
 	player.setY(300);
 	sf::View view(sf::FloatRect(0,0, 600, 600));
 	window.setView(view);
+	sf::Texture texture;
+	texture.loadFromFile("Textures/Direction.png", sf::IntRect(0, 0, 96, 96));
 
 	//Game Loop
 	while (window.isOpen())
@@ -101,6 +103,17 @@ int main()
 		//Take player input and alter player location
 		player.playerInput();
 		player.getSprite().setPosition(player.getX(), player.getY());
+
+		//Set character animation sprite
+		//Not sure if new variable needs to be created each time, some testing will be required prior to Alpha
+		sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+		if (localPosition.x > player.getX()) {
+			//player.animateRight(player, texture);
+			player.getSprite().setTexture(texture);
+		}
+		else {
+			player.getSprite().setTexture(textureBox.at(1));
+		}
 
 		//Handle enemy AI actions
 		//Enemies movement actions
