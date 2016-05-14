@@ -4,7 +4,7 @@ class Character {
 
 	int health;
 	int mana;
-	int x;
+	//int x;
 	int y;
 
 	public:
@@ -49,4 +49,10 @@ class Enemy : public Character {
 		sf::Sprite& getSprite();
 		void setX(int num);
 		void setY(int num);
+		void moveRight(int &x);
+		void moveUp(int &y);
+		void moveDown(int &y);
+		void moveLeft(int &x);
+
+		void movement(int x, int y, sf::Sprite &sprite);
 };

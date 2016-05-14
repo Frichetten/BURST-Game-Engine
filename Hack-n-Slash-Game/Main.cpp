@@ -44,9 +44,9 @@ void loadSprites(Player &player, std::vector<Enemy> &enemyBox, std::vector<sf::T
 }
 
 void renderEnemies(sf::RenderWindow &window, std::vector<Enemy> &enemyBox) {
-	window.draw(enemyBox.at(0).getSprite());
-	window.draw(enemyBox.at(1).getSprite());
-	window.draw(enemyBox.at(2).getSprite());
+	for (int i = 0; i < enemyBox.size(); i++) {
+		window.draw(enemyBox.at(i).getSprite());
+	}
 }
 
 int main()
@@ -63,9 +63,9 @@ int main()
 	Player player;
 
 	//Building enemies
-	srand(time(NULL));
+	srand(time(0));
 	std::vector<Enemy> enemyBox;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 5; i++) {
 		Enemy enemy;
 		enemy.setX(rand() % 750);
 		enemy.setY(rand() % 750);
@@ -88,8 +88,15 @@ int main()
 				window.close();
 		}
 
+		//Take player input and alter player location
 		player.playerInput();
 		player.getSprite().setPosition(player.getX(), player.getY());
+
+		//Handle enemy AI actions
+		//Enemies movement actions
+		for (int i = 0; i < enemyBox.size(); i++) {
+			enemyBox.at(i).movement(player.getX(), player.getY(), enemyBox.at(i).getSprite());
+		}
 
 		window.clear();
 		window.draw(map);

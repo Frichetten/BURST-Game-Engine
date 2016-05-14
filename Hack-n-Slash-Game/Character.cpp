@@ -3,6 +3,7 @@
 //#include <SFML/Graphics.hpp>
 
 int n = 5;
+int e = 2;
 
 Character::Character() {
 	printf("Successfully created a character\n");
@@ -12,16 +13,32 @@ void Character::moveLeft(int &x) {
 	x = x - n;
 }
 
+void Enemy::moveLeft(int &x) {
+	x = x - e;
+}
+
 void Character::moveRight(int &x) {
 	x = x + n;
+}
+
+void Enemy::moveRight(int &x) {
+	x = x + e;
 }
 
 void Character::moveUp(int &y) {
 	y = y - n;
 }
 
+void Enemy::moveUp(int &y) {
+	y = y - e;
+}
+
 void Character::moveDown(int &y) {
 	y = y + n;
+}
+
+void Enemy::moveDown(int &y) {
+	y = y + e;
 }
 
 int Player::getX() {
@@ -94,4 +111,24 @@ void Enemy::setSprite(sf::Sprite enemySprite) {
 
 sf::Sprite& Enemy::getSprite() {
 	return this->enemySprite;
+}
+
+void Enemy::movement(int x, int y, sf::Sprite &sprite) {
+	if (this->x < x) {
+		this->moveRight(this->x);
+		this->getSprite().setPosition(this->x, this->y);
+	}
+	else if (this->x > x) {
+		this->moveLeft(this->x);
+		this->getSprite().setPosition(this->x, this->y);
+	}
+
+	if (this->y < y) {
+		this->moveDown(this->y);
+		this->getSprite().setPosition(this->x, this->y);
+	}
+	else if (this->y > y) {
+		this->moveUp(this->y);
+		this->getSprite().setPosition(this->x, this->y);
+	}
 }
