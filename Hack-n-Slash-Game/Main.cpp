@@ -116,6 +116,7 @@ int main()
 		renderEnemies(window, enemyBox);
 
 		//Render UI
+		healthBar.setPosition(player.getX() - 200, player.getY() + 300);
 		window.draw(healthBar);
 
 		//Camera
