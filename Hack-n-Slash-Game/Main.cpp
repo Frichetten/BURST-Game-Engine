@@ -52,7 +52,7 @@ void renderEnemies(sf::RenderWindow &window, std::vector<Enemy> &enemyBox) {
 int main()
 {
 	//Creating the engine window
-	sf::RenderWindow window(sf::VideoMode(800, 800), "Game Engine Window");
+	sf::RenderWindow window(sf::VideoMode(700, 700), "Game Engine Window");
 	window.setFramerateLimit(60);
 
 	//Loading textures
@@ -65,7 +65,7 @@ int main()
 	//Building enemies
 	srand(time(0));
 	std::vector<Enemy> enemyBox;
-	for (int i = 0; i < 0; i++) {
+	for (int i = 0; i < 3; i++) {
 		Enemy enemy;
 		enemy.setX(rand() % 750);
 		enemy.setY(rand() % 750);
@@ -75,12 +75,18 @@ int main()
 	//Creating map, enemy, and player sprites
 	sf::Sprite map;
 	map.setTexture(textureBox.at(0));
-	map.setTextureRect({ 0,0,800,800 });
+	map.setTextureRect({ 0,0,1000,1000 });
 	loadSprites(player, enemyBox, textureBox);
 
 	sf::RectangleShape healthBar(sf::Vector2f(100,50));
 	healthBar.setFillColor(sf::Color::Blue);
 	healthBar.setPosition(10, 600);
+
+	/* DESTOY THIS AFTER TESTING*/
+	player.setX(300);
+	player.setY(300);
+	sf::View view(sf::FloatRect(0,0, 600, 600));
+	window.setView(view);
 
 	//Game Loop
 	while (window.isOpen())
@@ -98,10 +104,10 @@ int main()
 
 		//Handle enemy AI actions
 		//Enemies movement actions
-		for (int i = 0; i < enemyBox.size(); i++) {
-			enemyBox.at(i).movement(player.getX(), player.getY(), enemyBox.at(i).getSprite());
-		}
-
+		//for (int i = 0; i < enemyBox.size(); i++) {
+		//	enemyBox.at(i).movement(player.getX(), player.getY(), enemyBox.at(i).getSprite());
+		//}
+		
 		window.clear();
 		window.draw(map);
 		window.draw(player.getSprite());
@@ -111,6 +117,9 @@ int main()
 
 		//Render UI
 		window.draw(healthBar);
+
+		view.setCenter(player.getX(), player.getY());
+		window.setView(view);
 
 		window.display();
 	}

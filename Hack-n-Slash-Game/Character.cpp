@@ -77,6 +77,14 @@ Player::Player() {
 	this->mana = 7;
 }
 
+void Player::setX(int num) {
+	this->x = num;
+}
+
+void Player::setY(int num) {
+	this->y = num;
+}
+
 void Player::setSprite(sf::Sprite playerSprite) {
 	this->sprite = playerSprite;
 }

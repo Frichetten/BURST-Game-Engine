@@ -30,6 +30,8 @@ class Player : public Character {
 		sf::Sprite& getSprite();
 		int getX();
 		int getY();
+		void setX(int num);
+		void setY(int num);
 };
 
 class Enemy : public Character {
