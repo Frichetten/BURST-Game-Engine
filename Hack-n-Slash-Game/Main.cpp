@@ -65,7 +65,7 @@ int main()
 	//Building enemies
 	srand(time(0));
 	std::vector<Enemy> enemyBox;
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 0; i++) {
 		Enemy enemy;
 		enemy.setX(rand() % 750);
 		enemy.setY(rand() % 750);
@@ -104,6 +104,8 @@ int main()
 		
 		//Render enemy sprites
 		renderEnemies(window, enemyBox);
+
+		//Render UI
 
 		window.display();
 	}
