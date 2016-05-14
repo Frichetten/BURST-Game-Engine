@@ -64,7 +64,7 @@ void Player::setSprite(sf::Sprite playerSprite) {
 	this->sprite = playerSprite;
 }
 
-sf::Sprite Player::getSprite() {
+sf::Sprite& Player::getSprite() {
 	return this->sprite;
 }
 
@@ -86,4 +86,12 @@ Enemy::Enemy() {
 	this->y = 0;
 	this->health = 7;
 	this->mana = 5;
+}
+
+void Enemy::setSprite(sf::Sprite enemySprite) {
+	this->enemySprite = enemySprite;
+}
+
+sf::Sprite& Enemy::getSprite() {
+	return this->enemySprite;
 }

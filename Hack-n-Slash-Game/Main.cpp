@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 #include <vector>
+#include <time.h>
 #include "Character.h"
 
 void loadTextures(std::vector<sf::Texture> &textureBox) {
@@ -25,15 +26,27 @@ void loadTextures(std::vector<sf::Texture> &textureBox) {
 }
 
 void loadSprites(Player &player, std::vector<Enemy> &enemyBox, std::vector<sf::Texture> &textureBox) {
+	//Loading and assigning sprites for player
 	sf::Sprite playerSprite;
 	playerSprite.setTexture(textureBox.at(1));
 	playerSprite.setScale(0.5, 0.5);
 
 	player.setSprite(playerSprite);
+
+	//Loading and assigning sprites for enemy
+	for (int i = 0; i < enemyBox.size(); i++) {
+		sf::Sprite enemySprite;
+		enemyBox.at(i).setSprite(enemySprite);
+		enemyBox.at(i).getSprite().setTexture(textureBox.at(2));
+		enemyBox.at(i).getSprite().setScale(0.5, 0.5);
+		enemyBox.at(i).getSprite().setPosition(enemyBox.at(i).getX(), enemyBox.at(i).getY());
+	}
 }
 
 void renderEnemies(sf::RenderWindow &window, std::vector<Enemy> &enemyBox) {
-
+	window.draw(enemyBox.at(0).getSprite());
+	window.draw(enemyBox.at(1).getSprite());
+	window.draw(enemyBox.at(2).getSprite());
 }
 
 int main()
@@ -50,6 +63,7 @@ int main()
 	Player player;
 
 	//Building enemies
+	srand(time(NULL));
 	std::vector<Enemy> enemyBox;
 	for (int i = 0; i < 3; i++) {
 		Enemy enemy;
@@ -58,13 +72,11 @@ int main()
 		enemyBox.push_back(enemy);
 	}
 
-	//Creating map and player sprites
+	//Creating map, enemy, and player sprites
 	sf::Sprite map;
 	map.setTexture(textureBox.at(0));
 	map.setTextureRect({ 0,0,800,800 });
 	loadSprites(player, enemyBox, textureBox);
-	
-	srand(time(NULL));
 
 	//Game Loop
 	while (window.isOpen())
@@ -77,7 +89,6 @@ int main()
 		}
 
 		player.playerInput();
-		//printf("X:%i Y:%i\n", player.getX(), player.getY());
 		player.getSprite().setPosition(player.getX(), player.getY());
 
 		window.clear();

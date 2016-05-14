@@ -27,7 +27,7 @@ class Player : public Character {
 		Player();
 		void playerInput();
 		void setSprite(sf::Sprite playerSprite);
-		sf::Sprite getSprite();
+		sf::Sprite& getSprite();
 		int getX();
 		int getY();
 };
@@ -38,12 +38,15 @@ class Enemy : public Character {
 	int mana;
 	int x;
 	int y;
+	sf::Sprite enemySprite;
 
 	public:
 		Enemy();
 		int getX();
 		int getY();
 		int getHealth();
+		void setSprite(sf::Sprite playerSprite);
+		sf::Sprite& getSprite();
 		void setX(int num);
 		void setY(int num);
 };
