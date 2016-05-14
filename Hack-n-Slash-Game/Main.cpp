@@ -104,9 +104,9 @@ int main()
 
 		//Handle enemy AI actions
 		//Enemies movement actions
-		//for (int i = 0; i < enemyBox.size(); i++) {
-		//	enemyBox.at(i).movement(player.getX(), player.getY(), enemyBox.at(i).getSprite());
-		//}
+		for (int i = 0; i < enemyBox.size(); i++) {
+			enemyBox.at(i).movement(player.getX(), player.getY(), enemyBox.at(i).getSprite());
+		}
 		
 		window.clear();
 		window.draw(map);
@@ -118,7 +118,8 @@ int main()
 		//Render UI
 		window.draw(healthBar);
 
-		view.setCenter(player.getX(), player.getY());
+		//Camera
+		view.setCenter(player.getX()+player.getSprite().getLocalBounds().width/4, player.getY()+ player.getSprite().getLocalBounds().height/4);
 		window.setView(view);
 
 		window.display();
