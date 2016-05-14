@@ -10,5 +10,6 @@ This game will be rather grand in scale (at least for a first time game in an un
     * Basic Enemy Created (Complete)
     * Character Class Developed (Complete)
     * Player, and Enemy Classes Inherit Character Class (Complete)
-    * Efficient Enemy Creation
+    * Efficient Enemy Creation (Complete)
+    * Basic Enemy Movement
 
