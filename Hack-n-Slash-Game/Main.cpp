@@ -104,15 +104,10 @@ int main()
 		player.playerInput();
 		player.getSprite().setPosition(player.getX(), player.getY());
 
-		//Set character animation sprite
-		//Not sure if new variable needs to be created each time, some testing will be required prior to Alpha
-		sf::Vector2i localPosition = sf::Mouse::getPosition(window);
-		if (localPosition.x > player.getX()) {
-			//player.animateRight(player, texture);
-			player.getSprite().setTexture(texture);
-		}
-		else {
-			player.getSprite().setTexture(textureBox.at(1));
+		//Combat
+		if (event.type == sf::Event::MouseMoved) {
+			int pos = sf::Mouse::getPosition(window).x;
+			printf("%i\n", pos);
 		}
 
 		//Handle enemy AI actions
