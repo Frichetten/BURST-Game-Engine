@@ -9,6 +9,7 @@ class Character {
 
 	public:
 		Character();
+		Character(int health);
 		void moveLeft(int &x);
 		void moveRight(int &x);
 		void moveUp(int &y);
@@ -24,7 +25,7 @@ class Player : public Character {
 	sf::Sprite sprite;
 
 	public:
-		Player();
+		Player(int health);
 		void playerInput();
 		void setSprite(sf::Sprite playerSprite);
 		sf::Sprite& getSprite();
@@ -44,7 +45,7 @@ class Enemy : public Character {
 	sf::Sprite enemySprite;
 
 	public:
-		Enemy();
+		Enemy(int health);
 		int getX();
 		int getY();
 		int getHealth();

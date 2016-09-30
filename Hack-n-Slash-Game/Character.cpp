@@ -6,7 +6,12 @@ int n = 5;
 int e = 2;
 
 Character::Character() {
+	printf("Defualt Constructor\n");
+}
+
+Character::Character(int health) {
 	printf("Successfully created a character\n");
+	this->health = health;
 }
 
 void Character::moveLeft(int &x) {
@@ -69,11 +74,11 @@ int Enemy::getHealth() {
 	return this->health;
 }
 
-Player::Player() {
+Player::Player(int health) {
 	printf("Successfully created a player\n");
 	this->x = 0;
 	this->y = 0;
-	this->health = 10;
+	this->health = health;
 	this->mana = 7;
 }
 
@@ -109,11 +114,11 @@ void Player::animateRight(Player &player, sf::Texture texture) {
 	player.getSprite().setTexture(texture);
 }
 
-Enemy::Enemy() {
+Enemy::Enemy(int health) {
 	printf("Successfully created a Enemy\n");
 	this->x = 0;
 	this->y = 0;
-	this->health = 7;
+	this->health = health;
 	this->mana = 5;
 }
 

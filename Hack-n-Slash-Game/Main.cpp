@@ -60,13 +60,13 @@ int main()
 	loadTextures(textureBox);
 
 	//Building player character
-	Player player;
+	Player player(10);
 
 	//Building enemies
 	srand(time(0));
 	std::vector<Enemy> enemyBox;
 	for (int i = 0; i < 3; i++) {
-		Enemy enemy;
+		Enemy enemy(5);
 		enemy.setX(rand() % 750);
 		enemy.setY(rand() % 750);
 		enemyBox.push_back(enemy);
