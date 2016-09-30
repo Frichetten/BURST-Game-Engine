@@ -4,6 +4,10 @@ A 2D Hack-n-Slash game engine written in C++ and uses the SFML media libraries, 
 **(Project on indefinite hold - plan to work on new game engine using OpenGL rather than SFML)**  
 **(UPDATE: Might return to this project should time permit)**
 
+<video width="320" height="240" controls>
+  <source src="EngineTest.webm" type="video/webm">
+</video>
+
 This game engine will be rather grand in scale (at least for a first time game in an unfamiliar framework). The goal is a 2D, Hack-n-Slash. To avoid feature creep and spaghetti code it is important to develop the game in modules, and tighten up the features as I go along. First, the engine will need to be developed, then the interface, followed by art assets. For a full change log see below.
 
 ## Development Log
