@@ -43,7 +43,7 @@ void renderEnemies(sf::RenderWindow &window, std::vector<Enemy> &enemyBox) {
 int main()
 {
 	//Creating the engine window
-	sf::RenderWindow window(sf::VideoMode(700, 700), "Game Engine Window");
+	sf::RenderWindow window(sf::VideoMode(1000, 800), "Game Engine Window");
 	window.setFramerateLimit(60);
 
 	//Loading textures
@@ -56,7 +56,7 @@ int main()
 	//Creating map, enemy, and player sprites
 	sf::Sprite map;
 	map.setTexture(textureBox.at(0));
-	map.setTextureRect({ 0,0,1000,1000 });
+	map.setTextureRect({ 0,0,1200,1000 });
 	loadSprites(player, textureBox);
 
 	/* DESTOY THIS AFTER TESTING*/
@@ -64,9 +64,8 @@ int main()
 	player.setY(300);
 	sf::View view(sf::FloatRect(0,0, 600, 600));
 	window.setView(view);
-	sf::Texture texture;
-	texture.loadFromFile("Textures/Direction.png", sf::IntRect(0, 0, 96, 96));
-
+	int x = 0;
+	int y = 0;
 	//Game Loop
 	while (window.isOpen())
 	{
@@ -81,21 +80,32 @@ int main()
 		player.playerInput();
 		player.getSprite().setPosition(player.getX(), player.getY());
 
-		//Combat
+		//Mouse Movement
+		sf::RectangleShape rect;
 		if (event.type == sf::Event::MouseMoved) {
-			int pos = sf::Mouse::getPosition(window).x;
-			printf("%i\n", pos);
-			//If 
+			x = sf::Mouse::getPosition(window).x;
+			y = sf::Mouse::getPosition(window).y;
+			printf("X:%i\n", x);
+			printf("Y:%i\n", y);
+		}
+		if (event.type == sf::Event::MouseButtonPressed) {
+			printf("Pressed\n");
+			rect.setSize(sf::Vector2f(100, 100));
+			rect.setPosition(x, y);
+			rect.setFillColor(sf::Color(0, 0, 0, 255));
 		}
 		
+		//Draw to the Screen
 		window.clear();
 		window.draw(map);
 		window.draw(player.getSprite());
+		window.draw(rect);
 
 		//Camera
 		view.setCenter(player.getX()+player.getSprite().getLocalBounds().width/4, player.getY()+ player.getSprite().getLocalBounds().height/4);
 		window.setView(view);
 
+		//Display the rendering
 		window.display();
 	}
 
