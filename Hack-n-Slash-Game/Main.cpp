@@ -25,22 +25,13 @@ void loadTextures(std::vector<sf::Texture> &textureBox) {
 	textureBox.push_back(enemyTexture);
 }
 
-void loadSprites(Player &player, std::vector<Enemy> &enemyBox, std::vector<sf::Texture> &textureBox) {
+void loadSprites(Player &player, std::vector<sf::Texture> &textureBox) {
 	//Loading and assigning sprites for player
 	sf::Sprite playerSprite;
 	playerSprite.setTexture(textureBox.at(1));
 	playerSprite.setScale(0.5, 0.5);
 
 	player.setSprite(playerSprite);
-
-	//Loading and assigning sprites for enemy
-	for (int i = 0; i < enemyBox.size(); i++) {
-		sf::Sprite enemySprite;
-		enemyBox.at(i).setSprite(enemySprite);
-		enemyBox.at(i).getSprite().setTexture(textureBox.at(2));
-		enemyBox.at(i).getSprite().setScale(0.5, 0.5);
-		enemyBox.at(i).getSprite().setPosition(enemyBox.at(i).getX(), enemyBox.at(i).getY());
-	}
 }
 
 void renderEnemies(sf::RenderWindow &window, std::vector<Enemy> &enemyBox) {
@@ -62,25 +53,11 @@ int main()
 	//Building player character
 	Player player(10);
 
-	//Building enemies
-	srand(time(0));
-	std::vector<Enemy> enemyBox;
-	for (int i = 0; i < 3; i++) {
-		Enemy enemy(5);
-		enemy.setX(rand() % 750);
-		enemy.setY(rand() % 750);
-		enemyBox.push_back(enemy);
-	}
-
 	//Creating map, enemy, and player sprites
 	sf::Sprite map;
 	map.setTexture(textureBox.at(0));
 	map.setTextureRect({ 0,0,1000,1000 });
-	loadSprites(player, enemyBox, textureBox);
-
-	sf::RectangleShape healthBar(sf::Vector2f(100,50));
-	healthBar.setFillColor(sf::Color::Blue);
-	healthBar.setPosition(10, 600);
+	loadSprites(player, textureBox);
 
 	/* DESTOY THIS AFTER TESTING*/
 	player.setX(300);
@@ -108,24 +85,12 @@ int main()
 		if (event.type == sf::Event::MouseMoved) {
 			int pos = sf::Mouse::getPosition(window).x;
 			printf("%i\n", pos);
-		}
-
-		//Handle enemy AI actions
-		//Enemies movement actions
-		for (int i = 0; i < enemyBox.size(); i++) {
-			enemyBox.at(i).movement(player.getX(), player.getY(), enemyBox.at(i).getSprite());
+			//If 
 		}
 		
 		window.clear();
 		window.draw(map);
 		window.draw(player.getSprite());
-		
-		//Render enemy sprites
-		renderEnemies(window, enemyBox);
-
-		//Render UI
-		healthBar.setPosition(view.getCenter().x-280, view.getCenter().y + 230);
-		window.draw(healthBar);
 
 		//Camera
 		view.setCenter(player.getX()+player.getSprite().getLocalBounds().width/4, player.getY()+ player.getSprite().getLocalBounds().height/4);
